@@ -10,6 +10,14 @@ import { reviewRouter } from "./routes/review.routes";
 
 const app = express();
 
+app.use(
+  cors({
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Set-Cookie"],
+    origin: [/croissant\.one$/, /localhost:\d+$/, "http://localhost:5173"],
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("common"));
@@ -19,15 +27,6 @@ app.use(helmet());
 app.use("/buildings", buildingRouter);
 app.use("/bathrooms", bathroomRouter);
 app.use("/reviews", reviewRouter);
-
-// TODO: Remove this in production and add a whitelist
-app.use(
-  cors({
-    allowedHeaders: ["Content-Type", "Authorization"],
-    exposedHeaders: ["Set-Cookie"],
-    origin: [/croissant\.one$/, /localhost:\d+$/, "http://localhost:5173"],
-  })
-);
 
 // Health check
 app.get("/", (_, res) => {
