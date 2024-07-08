@@ -14,7 +14,12 @@ app.use(
   cors({
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Set-Cookie"],
-    origin: [/croissant\.one$/, /localhost:\d+$/, "http://localhost:5173"],
+    origin: [
+      /croissant\.one$/,
+      /localhost:\d+$/,
+      "http://localhost:5173",
+      ...config.ORIGINS,
+    ],
   })
 );
 
