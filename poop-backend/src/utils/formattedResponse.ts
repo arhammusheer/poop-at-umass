@@ -4,3 +4,5 @@ const respond = (body: object, success: boolean = true) => {
     data: body,
   };
 };
+
+export { respond };
