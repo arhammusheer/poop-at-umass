@@ -12,6 +12,21 @@ const buildingController = {
     }
   },
 
+  getById: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      // Reject if id is not a number
+      if (isNaN(parseInt(id))) {
+        throw new Error("400:Id must be a number");
+      }
+
+      const building = await Building.getById(parseInt(id));
+      res.json(respond(building));
+    } catch (error) {
+      next(error);
+    }
+  },
+
   createBuilding: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { name, address } = req.body;

@@ -34,4 +34,21 @@ export default class Building {
 
     return new Building(building);
   }
+
+  public static async getById(id: number) {
+    const building = await prisma.building.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        bathrooms: true,
+      },
+    });
+
+    if (!building) {
+      throw new Error("404:Building not found");
+    }
+
+    return new Building(building);
+  }
 }
