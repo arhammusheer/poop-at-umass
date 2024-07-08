@@ -16,7 +16,7 @@ app.use(morgan("common"));
 app.use(cookieParser());
 app.use(helmet());
 
-app.use("/buildings",buildingRouter);
+app.use("/buildings", buildingRouter);
 app.use("/bathrooms", bathroomRouter);
 app.use("/reviews", reviewRouter);
 
@@ -25,11 +25,9 @@ app.use(
   cors({
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Set-Cookie"],
-    credentials: true,
-    origin: [/croissant\.one$/, /localhost:\d+$/],
+    origin: [/croissant\.one$/, /localhost:\d+$/, "http://localhost:5173"],
   })
 );
-
 
 // Health check
 app.get("/", (_, res) => {
@@ -37,7 +35,6 @@ app.get("/", (_, res) => {
     status: true,
   });
 });
-
 
 // Handle Errors
 app.use((err: Error, _: any, res: any, __: any) => {
