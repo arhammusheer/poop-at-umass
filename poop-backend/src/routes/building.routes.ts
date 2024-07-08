@@ -9,4 +9,11 @@ const buildingRouter = Router();
  */
 buildingRouter.get("/", buildingController.getAllBuildings);
 
+/**
+ * Create a building
+ * POST /buildings
+ */
+buildingRouter.post("/", buildingController.createBuilding);
+
+
 export { buildingRouter };

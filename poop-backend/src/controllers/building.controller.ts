@@ -11,6 +11,16 @@ const buildingController = {
       next(error);
     }
   },
+
+  createBuilding: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { name, address } = req.body;
+      const building = await Building.create(name, address);
+      res.json(respond(building));
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 export default buildingController;

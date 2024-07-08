@@ -23,4 +23,15 @@ export default class Building {
 
     return buildings.map((building) => new Building(building));
   }
+
+  public static async create(name: string, address: string) {
+    const building = await prisma.building.create({
+      data: {
+        name,
+        address,
+      },
+    });
+
+    return new Building(building);
+  }
 }
